@@ -1,3 +1,4 @@
+#encoding:utf-8
 """
 Django settings for dailyfresh project.
 
@@ -37,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'df_user'
+
+    'df_user',
+    'df_goods',
+    #'df_cart',
+    'DjangoUeditor',
+    #'haystack',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'dailyfresh.urls'
+ROOT_URLCONF = 'lianxi.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dailyfresh.wsgi.application'
+WSGI_APPLICATION = 'lianxi.wsgi.application'
 
 
 # Database
@@ -108,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'UTC'
 
@@ -126,3 +132,32 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
+
+MEDIA_URL = '/upload/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload').replace("//", "/")
+
+# #富文本编辑器配置
+# TINYMCE_DEFAULT_CONFIG = {
+#     'theme': 'advanced',
+#     'width': 600,
+#     'height': 400,
+# }
+
+
+
+#全文检索
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+#自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE=18     #每页18条
+
+# 管理员界面每次可以操作的最大值
+DATA_UPLOAD_MAX_NUMBER_FIELDS=10000
+

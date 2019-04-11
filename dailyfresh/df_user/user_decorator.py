@@ -9,7 +9,7 @@ def login(func):
             red = HttpResponseRedirect('/user/login/')
             red.set_cookie('url',request.get_full_path()) #把路径放在cookie中,名字为url
             return red
-        return login_fun
+    return login_fun
 
 '''
 http://127.0.0.1:8000/200/?type=10
